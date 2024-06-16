@@ -14,3 +14,4 @@ position = Vector2(1, -46)
 scale = Vector2(9.5784, 9.26684)
 shadow_enabled = true
 texture = ExtResource("2_illjv")
+texture_scale = 2.43

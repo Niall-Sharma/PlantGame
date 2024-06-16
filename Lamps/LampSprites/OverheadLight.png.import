@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwuo4phfv3g56"
-path="res://.godot/imported/PinkWallpaper.png-4281e15ff0b14d51f64ee924b527ea82.ctex"
+uid="uid://et6jkb8ic001"
+path="res://.godot/imported/OverheadLight.png-4b1bbfbbed597cef21168158d10a0a0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Master/Sprites/PinkWallpaper.png"
-dest_files=["res://.godot/imported/PinkWallpaper.png-4281e15ff0b14d51f64ee924b527ea82.ctex"]
+source_file="res://Lamps/LampSprites/OverheadLight.png"
+dest_files=["res://.godot/imported/OverheadLight.png-4b1bbfbbed597cef21168158d10a0a0a.ctex"]
 
 [params]
 

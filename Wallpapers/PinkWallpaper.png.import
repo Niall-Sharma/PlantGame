@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxq1wtindcbxh"
-path="res://.godot/imported/pixilart-drawing.png-ff5ed38f827b6417d0a26219458268b5.ctex"
+uid="uid://cwuo4phfv3g56"
+path="res://.godot/imported/PinkWallpaper.png-96a5e0b286f6eb556858a5f65ee4e6bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Master/Sprites/pixilart-drawing.png"
-dest_files=["res://.godot/imported/pixilart-drawing.png-ff5ed38f827b6417d0a26219458268b5.ctex"]
+source_file="res://Wallpapers/PinkWallpaper.png"
+dest_files=["res://.godot/imported/PinkWallpaper.png-96a5e0b286f6eb556858a5f65ee4e6bd.ctex"]
 
 [params]
 

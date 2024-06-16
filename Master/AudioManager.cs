@@ -24,4 +24,12 @@ public partial class AudioManager : Node
 		playback.Play();
 		
 	}
+
+	public void PlayMusic(AudioClip audio){
+		var playback = new AudioStreamPlayer2D();
+		AddChild(playback);
+		playback.Stream = audio.file;
+		playback.VolumeDb = audio.volume;
+		playback.Play();
+	}
 }

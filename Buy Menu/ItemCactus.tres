@@ -10,4 +10,5 @@ plantIcon = ExtResource("1_nebwp")
 plantName = "Cactus"
 plantPrice = 3
 numberOfStages = 4
+isReusable = false
 plantPrefab = ExtResource("2_arakx")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0b7fkhannpa2"]
+
+[ext_resource type="Texture2D" uid="uid://et6jkb8ic001" path="res://Lamps/LampSprites/OverheadLight.png" id="1_5t24w"]
+[ext_resource type="Texture2D" uid="uid://dno148llia1h1" path="res://Light.tres" id="2_lp4nj"]
+
+[node name="Lamp" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15, 55)
+scale = Vector2(8, 8)
+texture = ExtResource("1_5t24w")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(12, 179)
+scale = Vector2(9.5784, 9.26684)
+texture = ExtResource("2_lp4nj")
+texture_scale = 3.0
