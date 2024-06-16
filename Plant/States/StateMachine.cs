@@ -89,6 +89,7 @@ public partial class StateMachine : Node
 	}
 
 	public void KillPlant(){
+		currentState.timer.Stop();
 		setNextState(states[4]);
 		waterTimer.Stop();
 	}

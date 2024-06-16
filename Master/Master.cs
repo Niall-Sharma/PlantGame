@@ -16,6 +16,8 @@ public partial class Master : Node2D
 	[Export]
 	Control buyMenu;
 
+	[Export]
+	BuyMenu menuCode;
 	private void _on_watering_button_toggled(bool toggled_on){
 		GD.Print(toggled_on);
 		waterToggle = toggled_on;
@@ -35,7 +37,7 @@ public partial class Master : Node2D
 	}
 	private void _on_buy_button_pressed(){
 		buyMenu.Visible = !buyMenu.Visible;
-
+		menuCode.UpdateMenu();
     }
 
 	public void BuyPlant(PackedScene instance, int price){
