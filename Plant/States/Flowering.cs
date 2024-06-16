@@ -4,9 +4,6 @@ using System;
 public partial class Flowering : State
 {
 
-	[Export]
-	float value;
-
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _update()
 	{
@@ -21,7 +18,10 @@ public partial class Flowering : State
     }
 
     void HarvestPlant(){
-		master.AddCurrency(value);
+		master.AddCurrency(GetParent<StateMachine>().plantValue);
+		if(!GetParent<StateMachine>().isReusable){
+			GetTree().QueueDelete(GetParent().GetParent());
+		}
 		GetParent<StateMachine>().setNextState(nextState);
 	}
 

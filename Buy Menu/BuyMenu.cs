@@ -17,7 +17,7 @@ public partial class BuyMenu : VBoxContainer
 	Label plantPrice;
 
 	[Export]
-	Label stages;
+	Label reusable;
 
 
 	public int index = 0;
@@ -44,6 +44,14 @@ public partial class BuyMenu : VBoxContainer
 		plantIcon.Texture = catalogItems[index].plantIcon;
 		plantName.Text = catalogItems[index].plantName;
 		plantPrice.Text = "$"+catalogItems[index].plantPrice.ToString();
-		stages.Text = catalogItems[index].numberOfStages.ToString() + " Stages";
+		if(catalogItems[index].isReusable){
+			reusable.Text = "Can Be Harvested";
+			reusable.AddThemeColorOverride("Green", Colors.Green);
+		}
+		else{
+			reusable.Text = "Can Not Harvested";
+			reusable.AddThemeColorOverride("Green", Colors.Red);		
+		}
+		// reusable.Text = catalogItems[index].numberOfStages.ToString() + " Stages";
 	}
 }

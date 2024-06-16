@@ -10,4 +10,5 @@ plantIcon = ExtResource("1_83yxb")
 plantName = "Basil"
 plantPrice = 1
 numberOfStages = 4
+isReusable = true
 plantPrefab = ExtResource("2_vr65j")

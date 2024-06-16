@@ -16,19 +16,15 @@ public partial class StateMachine : Node
 	[Export]
 	public State[] states;
 	
-	[ExportCategory("Debug")]
-	[Export]
-	public Label debugLabel;
-
-	[ExportCategory("Watering")]
+	// [ExportCategory("Debug")]
+	// [Export]
+	// public Label debugLabel;
 
 	[Export]
 
 	public Timer waterTimer;
 
-	[Export]
 
-	public float timeToWater;
 
 	[Export]
 	public ProgressBar timerLabel;
@@ -40,7 +36,15 @@ public partial class StateMachine : Node
 
 	[Export]
 	TextureProgressBar growthBar;
-	
+
+	[ExportCategory("Plant Stats")]
+	[Export]
+	public float timeToWater;
+	[Export]
+	public float plantValue;
+	[Export]
+	public bool isReusable;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -77,7 +81,7 @@ public partial class StateMachine : Node
 	public void switchState(){		
 		currentState = nextState;
 		currentState._OnEnter();
-		debugLabel.Text = currentState.Name;
+		// debugLabel.Text = currentState.Name;
 	}
 
 	public void setNextState(State state){

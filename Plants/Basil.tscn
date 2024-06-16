@@ -58,21 +58,22 @@ dropSoundEffect = ExtResource("3_kkjp7")
 position = Vector2(0.375, 0.5)
 shape = SubResource("RectangleShape2D_figim")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "sprite2D", "states", "debugLabel", "waterTimer", "timerLabel", "plantMain", "growthBar")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "sprite2D", "states", "waterTimer", "timerLabel", "plantMain", "growthBar")]
 script = ExtResource("4_55qpe")
 initialState = NodePath("Seedling")
 sprite2D = NodePath("../Sprite2D")
 states = [NodePath("Seedling"), NodePath("Fledgeling"), NodePath("Adult"), NodePath("Flowering"), NodePath("Dead")]
-debugLabel = NodePath("../DebugLabel")
 waterTimer = NodePath("WaterTimer")
-timeToWater = 10.0
 timerLabel = NodePath("../WaterBar")
 plantMain = NodePath("../PlantArea")
 growthBar = NodePath("../GrowthBar")
+timeToWater = 10.0
+plantValue = 1.0
+isReusable = true
 
 [node name="Seedling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("5_in8ke")
-TimeInState = 15.0
+TimeInState = 10.0
 timer = NodePath("SeedlingTimer")
 nextState = NodePath("../Fledgeling")
 plantSprite = ExtResource("6_rrbhy")
@@ -81,7 +82,7 @@ plantSprite = ExtResource("6_rrbhy")
 
 [node name="Fledgeling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("7_2x0td")
-TimeInState = 15.0
+TimeInState = 10.0
 timer = NodePath("FledgelingTimer")
 nextState = NodePath("../Adult")
 plantSprite = ExtResource("8_wouug")
@@ -90,7 +91,7 @@ plantSprite = ExtResource("8_wouug")
 
 [node name="Adult" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("9_sklv5")
-TimeInState = 30.0
+TimeInState = 25.0
 timer = NodePath("AdultTimer")
 nextState = NodePath("../Flowering")
 plantSprite = ExtResource("10_gtqr3")
@@ -99,7 +100,6 @@ plantSprite = ExtResource("10_gtqr3")
 
 [node name="Flowering" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("11_ebafr")
-value = 1.0
 TimeInState = 5.0
 timer = NodePath("Timer")
 nextState = NodePath("../Adult")

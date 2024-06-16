@@ -59,17 +59,17 @@ dropSoundEffect = ExtResource("3_6ep3o")
 position = Vector2(0.375, 0.5)
 shape = SubResource("RectangleShape2D_figim")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "sprite2D", "states", "debugLabel", "waterTimer", "timerLabel", "plantMain", "growthBar")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "sprite2D", "states", "waterTimer", "timerLabel", "plantMain", "growthBar")]
 script = ExtResource("4_tyxsr")
 initialState = NodePath("Seedling")
 sprite2D = NodePath("../Sprite2D")
 states = [NodePath("Seedling"), NodePath("Fledgeling"), NodePath("Adult"), NodePath("Flowering"), NodePath("Dead")]
-debugLabel = NodePath("../DebugLabel")
 waterTimer = NodePath("WaterTimer")
-timeToWater = 20.0
 timerLabel = NodePath("../WaterBar")
 plantMain = NodePath("../PlantArea")
 growthBar = NodePath("../GrowthBar")
+timeToWater = 60.0
+plantValue = 4.0
 
 [node name="Seedling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("5_hqqdf")
@@ -100,7 +100,6 @@ plantSprite = ExtResource("5_48tm4")
 
 [node name="Flowering" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("11_mc6i8")
-value = 1.0
 TimeInState = 5.0
 timer = NodePath("Timer")
 nextState = NodePath("../Adult")

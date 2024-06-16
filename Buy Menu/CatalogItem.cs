@@ -15,7 +15,8 @@ namespace Catalog
 
 		[Export]
 		public int numberOfStages;
-
+		[Export]
+		public bool isReusable;
 		[Export]
 		public PackedScene plantPrefab;
 
@@ -24,14 +25,15 @@ namespace Catalog
         // constructor with all default values.
         // Without a parameterless constructor, Godot will have problems
         // creating and editing your resource via the inspector.
-        public CatalogItem() : this(null, "", 0, 0,null) {}
+        public CatalogItem() : this(null, "", 0, 0,true,null) {}
 
-        public CatalogItem(Texture2D plantIcon, string plantName, int plantPrice, int numberOfStages, PackedScene plantPrefab)
+        public CatalogItem(Texture2D plantIcon, string plantName, int plantPrice, int numberOfStages, bool isReusable, PackedScene plantPrefab)
         {
             plantIcon = this.plantIcon;
 			plantName = this.plantName;
 			plantPrice = this.plantPrice;
 			numberOfStages = this.numberOfStages;
+			isReusable = this.isReusable;
 			plantPrefab = this.plantPrefab;
         }
     }

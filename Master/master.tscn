@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bbok12foypj58"]
+[gd_scene load_steps=25 format=3 uid="uid://bbok12foypj58"]
 
 [ext_resource type="Script" path="res://Master/Master.cs" id="1_te06e"]
 [ext_resource type="PackedScene" uid="uid://cljv8timn20u7" path="res://Plants/Cactus.tscn" id="2_vjhlb"]
@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://dt4yl25kjeovk" path="res://Buy Menu/ItemCactus.tres" id="11_7uahy"]
 [ext_resource type="Resource" uid="uid://b77d7omddubio" path="res://Buy Menu/ItemBonsai.tres" id="11_27hke"]
 [ext_resource type="PackedScene" uid="uid://b01ixaiuoojpe" path="res://Lamps/lamp2.tscn" id="11_g8syk"]
+[ext_resource type="Script" path="res://Master/StopWatch.cs" id="14_tiyv5"]
 [ext_resource type="Texture2D" uid="uid://ccdnaftm1foa0" path="res://Master/Sprites/pixil-frame-0 (1).png" id="17_0jhnd"]
 [ext_resource type="Texture2D" uid="uid://cvhvytw4slvyg" path="res://Master/Sprites/book-shelf-pixilart.png" id="18_bi6fh"]
 
@@ -45,11 +46,11 @@ currencyLabel = NodePath("CanvasLayer/Coin Counter/CoinCounter")
 plants = Array[PackedScene]([ExtResource("10_hdc5a"), ExtResource("2_vjhlb")])
 buyMenu = NodePath("CanvasLayer/Buy Menu")
 
-[node name="Cactus" parent="." instance=ExtResource("2_vjhlb")]
-position = Vector2(-333, -64)
-
 [node name="Audio Manager" type="Node" parent="."]
 script = ExtResource("8_x8eo3")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.419813, 0.419813, 0.419813, 1)
 
 [node name="Wallpaper" type="Sprite2D" parent="."]
 z_index = -5
@@ -79,27 +80,31 @@ shortcut = SubResource("Shortcut_tpkeo")
 text = "Buy"
 
 [node name="WateringButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-offset_left = -55.0
-offset_bottom = 31.0
+anchor_bottom = 1.0
+offset_left = -433.0
+offset_top = -145.0
 grow_horizontal = 0
+grow_vertical = 0
 theme_override_font_sizes/font_size = 100
 theme_override_icons/icon = ExtResource("6_tpk7o")
 toggle_mode = true
 text = "Water"
 
 [node name="Buy Menu" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Buy Menu"]
+[node name="BackGround" type="Panel" parent="CanvasLayer/Buy Menu"]
 material = SubResource("ShaderMaterial_8n25y")
 layout_mode = 1
 anchors_preset = 15
@@ -107,51 +112,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Buy Menu" node_paths=PackedStringArray("plantIcon", "plantName", "plantPrice", "stages")]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Buy Menu" node_paths=PackedStringArray("plantIcon", "plantName", "plantPrice", "reusable")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -199.0
-offset_top = -1278.0
-offset_right = 199.0
-offset_bottom = 1278.0
+offset_left = -315.5
+offset_top = -562.5
+offset_right = 315.5
+offset_bottom = 562.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 20
+theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("9_igsih")
 catalogItems = Array[Resource]([ExtResource("10_464ga"), ExtResource("11_7uahy"), ExtResource("11_27hke")])
 plantIcon = NodePath("Plant Icon")
 plantName = NodePath("Plant Name")
 plantPrice = NodePath("Plant Price")
-stages = NodePath("Stages")
+reusable = NodePath("Reusable")
 
 [node name="Plant Icon" type="TextureRect" parent="CanvasLayer/Buy Menu/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("9_inirs")
 expand_mode = 5
+stretch_mode = 5
 
 [node name="Plant Name" type="Label" parent="CanvasLayer/Buy Menu/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 75
 text = "BASIL"
 horizontal_alignment = 1
 
 [node name="Plant Price" type="Label" parent="CanvasLayer/Buy Menu/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 50
 text = "$0"
 horizontal_alignment = 1
 
-[node name="Stages" type="Label" parent="CanvasLayer/Buy Menu/VBoxContainer"]
+[node name="Reusable" type="Label" parent="CanvasLayer/Buy Menu/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 100
-text = "4 Stages"
+theme_override_font_sizes/font_size = 50
+text = "Can be harvested"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Buy Menu/VBoxContainer"]
@@ -196,10 +203,22 @@ offset_bottom = 137.0
 theme_override_font_sizes/font_size = 100
 text = "0"
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 137.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 100
+text = "00:00"
+script = ExtResource("14_tiyv5")
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.419813, 0.419813, 0.419813, 1)
+[node name="Cactus" parent="." instance=ExtResource("2_vjhlb")]
+position = Vector2(-333, -64)
 
 [node name="Basil" parent="." instance=ExtResource("10_hdc5a")]
 
@@ -223,8 +242,14 @@ shape = SubResource("RectangleShape2D_8jktt")
 [node name="Lamp" parent="Props" instance=ExtResource("11_2ufec")]
 position = Vector2(515, 80)
 
+[node name="Lamp4" parent="Props" instance=ExtResource("11_2ufec")]
+position = Vector2(-862, -548)
+
 [node name="Lamp2" parent="Props" instance=ExtResource("11_g8syk")]
 position = Vector2(-482, 25)
+
+[node name="Lamp3" parent="Props" instance=ExtResource("11_g8syk")]
+position = Vector2(1249, -580)
 
 [node name="Shelf" type="StaticBody2D" parent="Props"]
 z_index = -1
