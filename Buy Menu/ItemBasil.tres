@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://080ff0v40eyq"]
+
+[ext_resource type="Texture2D" uid="uid://c65ys5s36iaqv" path="res://Plants Sprite/Plant 1/Harvest.png" id="1_83yxb"]
+[ext_resource type="Script" path="res://Buy Menu/CatalogItem.cs" id="2_hsgwn"]
+[ext_resource type="PackedScene" uid="uid://d0npxienpnpjm" path="res://Plants/Basil.tscn" id="2_vr65j"]
+
+[resource]
+script = ExtResource("2_hsgwn")
+plantIcon = ExtResource("1_83yxb")
+plantName = "Basil"
+plantPrice = 1
+numberOfStages = 4
+plantPrefab = ExtResource("2_vr65j")

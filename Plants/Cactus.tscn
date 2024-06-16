@@ -1,0 +1,171 @@
+[gd_scene load_steps=19 format=3 uid="uid://cljv8timn20u7"]
+
+[ext_resource type="Script" path="res://Plant/PlantMain.cs" id="2_jgjo6"]
+[ext_resource type="Texture2D" uid="uid://elpqrd7rosk" path="res://Plants Sprite/Cactus/Cactus4.png" id="2_rgbje"]
+[ext_resource type="Resource" uid="uid://oe4abwfdbkhn" path="res://Plant/SoundEffects/DropSoundEffect.tres" id="3_6ep3o"]
+[ext_resource type="Texture2D" uid="uid://4fgjw6v1s5nv" path="res://Plants Sprite/Cactus/Cactus1.png" id="3_81qgf"]
+[ext_resource type="Script" path="res://Plant/States/StateMachine.cs" id="4_tyxsr"]
+[ext_resource type="Texture2D" uid="uid://ct13s8fx3e3f6" path="res://Plants Sprite/Cactus/Cactus2.png" id="4_whwn0"]
+[ext_resource type="Texture2D" uid="uid://chqkkwb54ojub" path="res://Plants Sprite/Cactus/Cactus3.png" id="5_48tm4"]
+[ext_resource type="Script" path="res://Plant/States/Seedling.cs" id="5_hqqdf"]
+[ext_resource type="Texture2D" uid="uid://ccq4ck43xph0b" path="res://Plants Sprite/Cactus/CactusDead.png" id="6_mjcch"]
+[ext_resource type="Script" path="res://Plant/States/Fledgeling.cs" id="7_0oh71"]
+[ext_resource type="Script" path="res://Plant/States/Adult.cs" id="9_ipsjg"]
+[ext_resource type="Script" path="res://Plant/States/Flowering.cs" id="11_mc6i8"]
+[ext_resource type="Script" path="res://Plant/States/Dead.cs" id="12_h188q"]
+[ext_resource type="Texture2D" uid="uid://ip0v73jx6ee5" path="res://Plant/spinner_progress.png" id="14_qgunr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5deg"]
+size = Vector2(22, 30.875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_figim"]
+size = Vector2(22, 30.75)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kfww"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dot1t"]
+bg_color = Color(0.000387356, 0.312638, 0.959722, 1)
+
+[node name="Cactus" type="RigidBody2D"]
+lock_rotation = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = ExtResource("2_rgbje")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.5)
+scale = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_w5deg")
+
+[node name="PlantArea" type="Area2D" parent="."]
+scale = Vector2(8, 8)
+script = ExtResource("2_jgjo6")
+dropSoundEffect = ExtResource("3_6ep3o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantArea"]
+position = Vector2(0.375, 0.5)
+shape = SubResource("RectangleShape2D_figim")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "sprite2D", "states", "debugLabel", "waterTimer", "timerLabel", "plantMain", "growthBar")]
+script = ExtResource("4_tyxsr")
+initialState = NodePath("Seedling")
+sprite2D = NodePath("../Sprite2D")
+states = [NodePath("Seedling"), NodePath("Fledgeling"), NodePath("Adult"), NodePath("Flowering"), NodePath("Dead")]
+debugLabel = NodePath("../DebugLabel")
+waterTimer = NodePath("WaterTimer")
+timeToWater = 10.0
+timerLabel = NodePath("../WaterBar")
+plantMain = NodePath("../PlantArea")
+growthBar = NodePath("../GrowthBar")
+
+[node name="Seedling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
+script = ExtResource("5_hqqdf")
+TimeInState = 5.0
+timer = NodePath("SeedlingTimer")
+nextState = NodePath("../Fledgeling")
+plantSprite = ExtResource("3_81qgf")
+
+[node name="SeedlingTimer" type="Timer" parent="StateMachine/Seedling"]
+
+[node name="Fledgeling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
+script = ExtResource("7_0oh71")
+TimeInState = 2.0
+timer = NodePath("FledgelingTimer")
+nextState = NodePath("../Adult")
+plantSprite = ExtResource("4_whwn0")
+
+[node name="FledgelingTimer" type="Timer" parent="StateMachine/Fledgeling"]
+
+[node name="Adult" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
+script = ExtResource("9_ipsjg")
+TimeInState = 2.0
+timer = NodePath("AdultTimer")
+nextState = NodePath("../Flowering")
+plantSprite = ExtResource("5_48tm4")
+
+[node name="AdultTimer" type="Timer" parent="StateMachine/Adult"]
+
+[node name="Flowering" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
+script = ExtResource("11_mc6i8")
+value = 1.0
+TimeInState = 5.0
+timer = NodePath("Timer")
+nextState = NodePath("../Adult")
+plantSprite = ExtResource("2_rgbje")
+
+[node name="Timer" type="Timer" parent="StateMachine/Flowering"]
+
+[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer")]
+script = ExtResource("12_h188q")
+TimeInState = 20.0
+timer = NodePath("Timer")
+plantSprite = ExtResource("6_mjcch")
+
+[node name="Timer" type="Timer" parent="StateMachine/Dead"]
+
+[node name="WaterTimer" type="Timer" parent="StateMachine"]
+
+[node name="DebugLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -151.0
+offset_right = 21.0
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="WaterBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = 51.0
+offset_right = -4.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.84, 2.4)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 30
+theme_override_styles/background = SubResource("StyleBoxFlat_3kfww")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dot1t")
+fill_mode = 3
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="GrowthBar" type="TextureProgressBar" parent="."]
+z_index = 2
+offset_left = -47.0
+offset_top = -216.0
+offset_right = 73.0
+offset_bottom = -96.0
+scale = Vector2(0.799998, 0.799998)
+max_value = 10.0
+step = 0.01
+value = 10.0
+fill_mode = 4
+texture_progress = ExtResource("14_qgunr")
+tint_progress = Color(1, 1, 0, 1)
+metadata/_edit_use_anchors_ = true

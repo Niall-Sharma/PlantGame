@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6g1ctcdh1ny1"]
+
+[ext_resource type="Texture2D" uid="uid://d2j3pvgk8t43t" path="res://Lamps/LampSprites/pixil-frame-0.png" id="1_md3u5"]
+[ext_resource type="Texture2D" uid="uid://dno148llia1h1" path="res://Light.tres" id="2_illjv"]
+
+[node name="Lamp" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = ExtResource("1_md3u5")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1, -46)
+scale = Vector2(9.5784, 9.26684)
+shadow_enabled = true
+texture = ExtResource("2_illjv")

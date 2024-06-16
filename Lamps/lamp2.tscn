@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b01ixaiuoojpe"]
+
+[ext_resource type="Texture2D" uid="uid://ixviw3fa0j3w" path="res://Lamps/LampSprites/pixil-frame-0 (4).png" id="1_u2dwx"]
+[ext_resource type="Texture2D" uid="uid://dno148llia1h1" path="res://Light.tres" id="2_qvcy0"]
+
+[node name="Lamp" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(58, 58)
+scale = Vector2(8, 8)
+texture = ExtResource("1_u2dwx")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(9.5784, 9.26684)
+texture = ExtResource("2_qvcy0")

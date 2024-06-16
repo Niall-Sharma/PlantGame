@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd6n21qgl2afb"]
+
+[ext_resource type="Script" path="res://Plant/State.cs" id="1_tc2u5"]
+
+[node name="State" type="Node"]
+script = ExtResource("1_tc2u5")
+
+[node name="Timer" type="Timer" parent="."]
