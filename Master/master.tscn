@@ -1,12 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://bbok12foypj58"]
+[gd_scene load_steps=24 format=3 uid="uid://bbok12foypj58"]
 
 [ext_resource type="Script" path="res://Master/Master.cs" id="1_te06e"]
 [ext_resource type="PackedScene" uid="uid://cljv8timn20u7" path="res://Plants/Cactus.tscn" id="2_vjhlb"]
-[ext_resource type="Script" path="res://Master/BuyButton.cs" id="4_0uhcl"]
 [ext_resource type="Texture2D" uid="uid://c5af4bj5eh73n" path="res://Master/Sprites/pixilart-drawing (1).png" id="5_genmb"]
 [ext_resource type="Texture2D" uid="uid://cwuo4phfv3g56" path="res://Master/Sprites/PinkWallpaper.png" id="6_inx1c"]
 [ext_resource type="Texture2D" uid="uid://bm3yruhdkcs6l" path="res://icon.svg" id="6_tpk7o"]
 [ext_resource type="Texture2D" uid="uid://b3qnpw6wqm3tq" path="res://Master/Sprites/GoldCoin.png" id="7_hniqu"]
+[ext_resource type="Shader" path="res://Master/blur.gdshader" id="8_3vj1x"]
 [ext_resource type="Script" path="res://Master/AudioManager.cs" id="8_x8eo3"]
 [ext_resource type="Script" path="res://Buy Menu/BuyMenu.cs" id="9_igsih"]
 [ext_resource type="Texture2D" uid="uid://c65ys5s36iaqv" path="res://Plants Sprite/Plant 1/Harvest.png" id="9_inirs"]
@@ -17,6 +17,21 @@
 [ext_resource type="Resource" uid="uid://b77d7omddubio" path="res://Buy Menu/ItemBonsai.tres" id="11_27hke"]
 [ext_resource type="PackedScene" uid="uid://b01ixaiuoojpe" path="res://Lamps/lamp2.tscn" id="11_g8syk"]
 [ext_resource type="Texture2D" uid="uid://ccdnaftm1foa0" path="res://Master/Sprites/pixil-frame-0 (1).png" id="17_0jhnd"]
+[ext_resource type="Texture2D" uid="uid://cvhvytw4slvyg" path="res://Master/Sprites/book-shelf-pixilart.png" id="18_bi6fh"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_4bltw"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_tpkeo"]
+events = [SubResource("InputEventKey_4bltw")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8n25y"]
+shader = ExtResource("8_3vj1x")
+shader_parameter/blur_type = 0
+shader_parameter/blur_amount = 5
+shader_parameter/blur_radius = 1.0
+shader_parameter/blur_direction = Vector2(1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jktt"]
 size = Vector2(47.6788, 20)
@@ -51,6 +66,7 @@ zoom = Vector2(0.65, 0.65)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BuyButton" type="Button" parent="CanvasLayer"]
+z_index = 100
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -59,8 +75,8 @@ offset_right = 191.0
 grow_vertical = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 80
+shortcut = SubResource("Shortcut_tpkeo")
 text = "Buy"
-script = ExtResource("4_0uhcl")
 
 [node name="WateringButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 1
@@ -77,11 +93,20 @@ text = "Water"
 [node name="Buy Menu" type="Control" parent="CanvasLayer"]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_left = 145.0
-offset_top = 12.0
-offset_right = 185.0
-offset_bottom = 52.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Buy Menu"]
+material = SubResource("ShaderMaterial_8n25y")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Buy Menu" node_paths=PackedStringArray("plantIcon", "plantName", "plantPrice", "stages")]
 layout_mode = 1
@@ -90,10 +115,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 596.0
-offset_top = -770.0
-offset_right = 994.0
-offset_bottom = 1786.0
+offset_left = -199.0
+offset_top = -1278.0
+offset_right = 199.0
+offset_bottom = 1278.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -212,6 +237,23 @@ texture = ExtResource("17_0jhnd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Shelf"]
 position = Vector2(0.28735, 8.86016)
+shape = SubResource("RectangleShape2D_ot66f")
+
+[node name="Shelf2" type="StaticBody2D" parent="Props"]
+z_index = -1
+position = Vector2(-1142, -468)
+scale = Vector2(10.44, 10.44)
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Shelf2"]
+scale = Vector2(2.17241, 2.17241)
+texture = ExtResource("18_bi6fh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Shelf2"]
+position = Vector2(0.28735, 6.13027)
+shape = SubResource("RectangleShape2D_ot66f")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Props/Shelf2"]
+position = Vector2(0.28735, 29.5019)
 shape = SubResource("RectangleShape2D_ot66f")
 
 [connection signal="pressed" from="CanvasLayer/BuyButton" to="." method="_on_buy_button_pressed"]

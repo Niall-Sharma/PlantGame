@@ -23,7 +23,6 @@ public partial class BuyMenu : VBoxContainer
 	public int index = 0;
 
 	private void _on_previous_pressed(){
-		GD.Print(index);
 		if(index > 0){
 			index--;
 			UpdateMenu();
@@ -35,8 +34,7 @@ public partial class BuyMenu : VBoxContainer
 	}
 
 	private void _on_advance_pressed(){
-		GD.Print(index);
-		if(index < catalogItems.Length){
+		if(index < catalogItems.Length-1){
 			index++;
 			UpdateMenu();
 		}

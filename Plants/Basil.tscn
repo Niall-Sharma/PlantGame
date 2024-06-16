@@ -72,7 +72,7 @@ growthBar = NodePath("../GrowthBar")
 
 [node name="Seedling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("5_in8ke")
-TimeInState = 5.0
+TimeInState = 15.0
 timer = NodePath("SeedlingTimer")
 nextState = NodePath("../Fledgeling")
 plantSprite = ExtResource("6_rrbhy")
@@ -81,7 +81,7 @@ plantSprite = ExtResource("6_rrbhy")
 
 [node name="Fledgeling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("7_2x0td")
-TimeInState = 2.0
+TimeInState = 15.0
 timer = NodePath("FledgelingTimer")
 nextState = NodePath("../Adult")
 plantSprite = ExtResource("8_wouug")
@@ -90,7 +90,7 @@ plantSprite = ExtResource("8_wouug")
 
 [node name="Adult" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("9_sklv5")
-TimeInState = 2.0
+TimeInState = 30.0
 timer = NodePath("AdultTimer")
 nextState = NodePath("../Flowering")
 plantSprite = ExtResource("10_gtqr3")

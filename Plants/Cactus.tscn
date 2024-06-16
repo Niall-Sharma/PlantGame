@@ -38,6 +38,7 @@ anti_aliasing = false
 bg_color = Color(0.000387356, 0.312638, 0.959722, 1)
 
 [node name="Cactus" type="RigidBody2D"]
+process_mode = 3
 lock_rotation = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -65,14 +66,14 @@ sprite2D = NodePath("../Sprite2D")
 states = [NodePath("Seedling"), NodePath("Fledgeling"), NodePath("Adult"), NodePath("Flowering"), NodePath("Dead")]
 debugLabel = NodePath("../DebugLabel")
 waterTimer = NodePath("WaterTimer")
-timeToWater = 10.0
+timeToWater = 20.0
 timerLabel = NodePath("../WaterBar")
 plantMain = NodePath("../PlantArea")
 growthBar = NodePath("../GrowthBar")
 
 [node name="Seedling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("5_hqqdf")
-TimeInState = 5.0
+TimeInState = 30.0
 timer = NodePath("SeedlingTimer")
 nextState = NodePath("../Fledgeling")
 plantSprite = ExtResource("3_81qgf")
@@ -81,7 +82,7 @@ plantSprite = ExtResource("3_81qgf")
 
 [node name="Fledgeling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("7_0oh71")
-TimeInState = 2.0
+TimeInState = 30.0
 timer = NodePath("FledgelingTimer")
 nextState = NodePath("../Adult")
 plantSprite = ExtResource("4_whwn0")
@@ -90,7 +91,7 @@ plantSprite = ExtResource("4_whwn0")
 
 [node name="Adult" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("9_ipsjg")
-TimeInState = 2.0
+TimeInState = 60.0
 timer = NodePath("AdultTimer")
 nextState = NodePath("../Flowering")
 plantSprite = ExtResource("5_48tm4")
