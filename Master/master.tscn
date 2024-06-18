@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bbok12foypj58"]
+[gd_scene load_steps=33 format=3 uid="uid://bbok12foypj58"]
 
 [ext_resource type="Script" path="res://Master/Master.cs" id="1_te06e"]
 [ext_resource type="PackedScene" uid="uid://cljv8timn20u7" path="res://Plants/Cactus.tscn" id="2_vjhlb"]
@@ -39,7 +39,7 @@ shader_parameter/blur_radius = 1.0
 shader_parameter/blur_direction = Vector2(1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jktt"]
-size = Vector2(47.6788, 20)
+size = Vector2(47.6788, 24.0536)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot66f"]
 size = Vector2(64.5594, 3.9272)
@@ -47,15 +47,16 @@ size = Vector2(64.5594, 3.9272)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mbf7d"]
 size = Vector2(28.0208, 1.92708)
 
-[sub_resource type="Gradient" id="Gradient_jk62g"]
+[sub_resource type="Gradient" id="Gradient_atod2"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1gifc"]
-gradient = SubResource("Gradient_jk62g")
-fill_from = Vector2(0, 1)
-fill_to = Vector2(0.0391304, 1)
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fr3np"]
+gradient = SubResource("Gradient_atod2")
 
-[node name="Master" type="Node2D" node_paths=PackedStringArray("currencyLabel", "buyMenu", "menuCode", "stopwatch", "dayCounter", "windowSprite", "canvasModulate")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_atmp5"]
+size = Vector2(9.24323, 20)
+
+[node name="Master" type="Node2D" node_paths=PackedStringArray("currencyLabel", "buyMenu", "menuCode", "stopwatch", "dayCounter", "windowSprite", "canvasModulate", "lamps", "sunLight")]
 script = ExtResource("1_te06e")
 currencyLabel = NodePath("CanvasLayer/Coin Counter/CoinCounter")
 buyMenu = NodePath("CanvasLayer/Buy Menu")
@@ -65,12 +66,18 @@ dayCounter = NodePath("CanvasLayer/Days")
 sprites = Array[Texture2D]([ExtResource("2_vnn7g"), ExtResource("3_1pq4k"), ExtResource("4_01mdq")])
 windowSprite = NodePath("Props/Window/Sprite2D")
 canvasModulate = NodePath("CanvasModulate")
+lamps = [NodePath("Props/Lamp"), NodePath("Props/Lamp5"), NodePath("Props/Lamp2"), NodePath("Props/Lamp3"), NodePath("Props/Lamp7")]
+sunLight = NodePath("Props/DirectionalLight2D")
 
 [node name="Audio Manager" type="Node" parent="."]
 script = ExtResource("8_x8eo3")
 
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+autoplay = true
+bus = &"Music"
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.190762, 0.190762, 0.190762, 1)
+color = Color(0.109796, 0.168562, 0.249261, 1)
 
 [node name="Wallpaper" type="Sprite2D" parent="."]
 z_index = -5
@@ -262,7 +269,7 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_genmb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Table"]
-position = Vector2(0.340849, -8.22536)
+position = Vector2(0.340849, -10.2522)
 shape = SubResource("RectangleShape2D_8jktt")
 
 [node name="Lamp" parent="Props" instance=ExtResource("11_2ufec")]
@@ -320,22 +327,31 @@ scale = Vector2(19.2, 19.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Window"]
 position = Vector2(-0.104166, 12.8906)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_mbf7d")
 
 [node name="Sprite2D" type="Sprite2D" parent="Props/Window"]
 texture = ExtResource("3_1pq4k")
 
-[node name="Floor" type="Sprite2D" parent="Props"]
+[node name="Floor" type="StaticBody2D" parent="Props"]
 z_index = 1
-position = Vector2(-711, 1023)
+position = Vector2(6, 722)
 scale = Vector2(1874.22, -9.33249)
-texture = SubResource("GradientTexture2D_1gifc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Props/Floor"]
+scale = Vector2(1, 41.8251)
+texture = SubResource("GradientTexture1D_fr3np")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Floor"]
+position = Vector2(-0.00160068, -16.823)
+scale = Vector2(0.245412, 1.70671)
+shape = SubResource("RectangleShape2D_atmp5")
 
 [node name="Lamp7" parent="Props" instance=ExtResource("22_55vdm")]
 position = Vector2(-24, -873)
 
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Props"]
+visible = false
+energy = 0.5
 
 [connection signal="pressed" from="CanvasLayer/BuyButton" to="." method="_on_buy_button_pressed"]
 [connection signal="toggled" from="CanvasLayer/WateringButton" to="." method="_on_watering_button_toggled"]

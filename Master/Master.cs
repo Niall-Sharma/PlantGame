@@ -32,6 +32,21 @@ public partial class Master : Node2D
 	bool isNight;
 	double timeElapsed;
 	int days = 1;
+
+	[ExportCategory("Lamps")]
+	[Export]
+	Node2D[] lamps;
+	[Export]
+	Node2D sunLight;
+
+
+	public void toggleLamps(bool toggle){
+		foreach (Node2D lamp in lamps)
+		{
+			lamp.GetChild<PointLight2D>(1).Visible = toggle;
+			sunLight.Visible = !toggle;
+		}
+	}
 	private void _on_watering_button_toggled(bool toggled_on){
 		GD.Print(toggled_on);
 		waterToggle = toggled_on;
@@ -98,12 +113,14 @@ public partial class Master : Node2D
 		if(minutes > 19 && isNight){
 			windowSprite.Texture = sprites[2];
 			isNight = false;
+			toggleLamps(true);
 
 		}
 		if(minutes > 7 && !isNight){
 			isNight = true;
 			Random rng = new Random();
 			windowSprite.Texture = sprites[rng.Next(0,1)];
+			toggleLamps(false);
 		}
 
      }
