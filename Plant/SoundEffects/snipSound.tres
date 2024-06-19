@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bg88v0tr2bub1"]
+
+[ext_resource type="AudioStream" uid="uid://bn727bjm1r4u3" path="res://Plant/SoundEffects/snip.wav" id="1_leaxq"]
+[ext_resource type="Script" path="res://AudioClip.cs" id="2_1dlsm"]
+
+[resource]
+script = ExtResource("2_1dlsm")
+volume = 1
+file = ExtResource("1_leaxq")

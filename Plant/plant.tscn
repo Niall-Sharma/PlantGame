@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c0jlgt8i75voc"]
+[gd_scene load_steps=19 format=3 uid="uid://c0jlgt8i75voc"]
 
 [ext_resource type="Script" path="res://Plant/PlantMain.cs" id="1_urtv6"]
 [ext_resource type="Resource" uid="uid://oe4abwfdbkhn" path="res://Plant/SoundEffects/DropSoundEffect.tres" id="3_mi3gy"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://Plant/States/Adult.cs" id="6_4p0t5"]
 [ext_resource type="Script" path="res://Plant/States/Flowering.cs" id="7_7y1gh"]
 [ext_resource type="Texture2D" uid="uid://dae86a1ypvw5m" path="res://Plants Sprite/Plant 1/Sappling.png" id="7_umhdw"]
-[ext_resource type="Texture2D" path="res://Plant Sprite/Plant 1/Adult.png" id="9_7dm3b"]
 [ext_resource type="Script" path="res://Plant/States/Dead.cs" id="9_hsjx1"]
 [ext_resource type="Texture2D" uid="uid://clx347n8tnim7" path="res://Plants Sprite/Plant 1/Adult.png" id="10_fspsb"]
 [ext_resource type="Texture2D" uid="uid://c65ys5s36iaqv" path="res://Plants Sprite/Plant 1/Harvest.png" id="11_kkw7h"]
@@ -43,7 +42,6 @@ lock_rotation = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(8, 8)
-texture = ExtResource("9_7dm3b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4.5)
@@ -59,17 +57,16 @@ dropSoundEffect = ExtResource("3_mi3gy")
 position = Vector2(0.375, 0.5)
 shape = SubResource("RectangleShape2D_figim")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "sprite2D", "states", "debugLabel", "waterTimer", "timerLabel", "plantMain", "growthBar")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "sprite2D", "states", "waterTimer", "timerLabel", "plantMain", "growthBar")]
 script = ExtResource("3_xwjg6")
 initialState = NodePath("Seedling")
 sprite2D = NodePath("../Sprite2D")
 states = [NodePath("Seedling"), NodePath("Fledgeling"), NodePath("Adult"), NodePath("Flowering"), NodePath("Dead")]
-debugLabel = NodePath("../DebugLabel")
 waterTimer = NodePath("WaterTimer")
-timeToWater = 10.0
 timerLabel = NodePath("../WaterBar")
 plantMain = NodePath("../PlantArea")
 growthBar = NodePath("../GrowthBar")
+timeToWater = 10.0
 
 [node name="Seedling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("4_bob46")
@@ -100,7 +97,6 @@ plantSprite = ExtResource("10_fspsb")
 
 [node name="Flowering" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("7_7y1gh")
-value = 1.0
 TimeInState = 5.0
 timer = NodePath("Timer")
 nextState = NodePath("../Adult")

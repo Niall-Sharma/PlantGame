@@ -24,6 +24,7 @@ public partial class State : Node
 
 	public TextureProgressBar growthBar;
 
+	public AudioManager audioManager;
 	// Called when the node enters the scene tree for the first time.
 
 	public virtual void _OnEnter()

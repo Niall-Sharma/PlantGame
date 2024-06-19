@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cljv8timn20u7"]
+[gd_scene load_steps=21 format=3 uid="uid://cljv8timn20u7"]
 
 [ext_resource type="Script" path="res://Plant/PlantMain.cs" id="2_jgjo6"]
 [ext_resource type="Texture2D" uid="uid://elpqrd7rosk" path="res://Plants Sprite/Cactus/Cactus4.png" id="2_rgbje"]
@@ -8,10 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://ct13s8fx3e3f6" path="res://Plants Sprite/Cactus/Cactus2.png" id="4_whwn0"]
 [ext_resource type="Texture2D" uid="uid://chqkkwb54ojub" path="res://Plants Sprite/Cactus/Cactus3.png" id="5_48tm4"]
 [ext_resource type="Script" path="res://Plant/States/Seedling.cs" id="5_hqqdf"]
+[ext_resource type="Resource" uid="uid://bevowcu380dks" path="res://Plant/SoundEffects/wateringSoundEffect.tres" id="5_ub51f"]
 [ext_resource type="Texture2D" uid="uid://ccq4ck43xph0b" path="res://Plants Sprite/Cactus/CactusDead.png" id="6_mjcch"]
 [ext_resource type="Script" path="res://Plant/States/Fledgeling.cs" id="7_0oh71"]
 [ext_resource type="Script" path="res://Plant/States/Adult.cs" id="9_ipsjg"]
 [ext_resource type="Script" path="res://Plant/States/Flowering.cs" id="11_mc6i8"]
+[ext_resource type="Resource" uid="uid://bg88v0tr2bub1" path="res://Plant/SoundEffects/snipSound.tres" id="12_2ybl1"]
 [ext_resource type="Script" path="res://Plant/States/Dead.cs" id="12_h188q"]
 [ext_resource type="Texture2D" uid="uid://ip0v73jx6ee5" path="res://Plant/spinner_progress.png" id="14_qgunr"]
 
@@ -70,6 +72,7 @@ plantMain = NodePath("../PlantArea")
 growthBar = NodePath("../GrowthBar")
 timeToWater = 60.0
 plantValue = 4.0
+wateringSoundEffect = ExtResource("5_ub51f")
 
 [node name="Seedling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("5_hqqdf")
@@ -100,6 +103,7 @@ plantSprite = ExtResource("5_48tm4")
 
 [node name="Flowering" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("11_mc6i8")
+snipSound = ExtResource("12_2ybl1")
 TimeInState = 5.0
 timer = NodePath("Timer")
 nextState = NodePath("../Adult")

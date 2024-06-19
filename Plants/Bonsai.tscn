@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://br8y4bnw3y8mo"]
+[gd_scene load_steps=21 format=3 uid="uid://br8y4bnw3y8mo"]
 
 [ext_resource type="Texture2D" uid="uid://c18lfa4epbfjp" path="res://Plants Sprite/Bonsai/Bonsai4.png" id="1_kyvm7"]
 [ext_resource type="Script" path="res://Plant/PlantMain.cs" id="2_36c2g"]
 [ext_resource type="Resource" uid="uid://oe4abwfdbkhn" path="res://Plant/SoundEffects/DropSoundEffect.tres" id="3_r0ni0"]
 [ext_resource type="Script" path="res://Plant/States/StateMachine.cs" id="4_1ii1p"]
 [ext_resource type="Script" path="res://Plant/States/Seedling.cs" id="5_mg33a"]
+[ext_resource type="Resource" uid="uid://bevowcu380dks" path="res://Plant/SoundEffects/wateringSoundEffect.tres" id="5_pntr7"]
 [ext_resource type="Texture2D" uid="uid://cff86b7edksvh" path="res://Plants Sprite/Bonsai/Bonsai1.png" id="6_85gbh"]
 [ext_resource type="Script" path="res://Plant/States/Fledgeling.cs" id="7_le86g"]
 [ext_resource type="Texture2D" uid="uid://ctkgkwl8d83dg" path="res://Plants Sprite/Bonsai/Bonsai2.png" id="8_yyh66"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c1ilj04o822q4" path="res://Plants Sprite/Bonsai/Bonsai3.png" id="10_w5jey"]
 [ext_resource type="Script" path="res://Plant/States/Flowering.cs" id="11_mn1w0"]
 [ext_resource type="Script" path="res://Plant/States/Dead.cs" id="12_d8kcv"]
+[ext_resource type="Resource" uid="uid://bg88v0tr2bub1" path="res://Plant/SoundEffects/snipSound.tres" id="12_eo704"]
 [ext_resource type="Texture2D" uid="uid://b2h3liyoymdgy" path="res://Plants Sprite/Bonsai/BonsaiDead.png" id="13_swkt6"]
 [ext_resource type="Texture2D" uid="uid://ip0v73jx6ee5" path="res://Plant/spinner_progress.png" id="14_05nxt"]
 
@@ -67,11 +69,13 @@ waterTimer = NodePath("WaterTimer")
 timerLabel = NodePath("../WaterBar")
 plantMain = NodePath("../PlantArea")
 growthBar = NodePath("../GrowthBar")
-timeToWater = 10.0
+timeToWater = 30.0
+plantValue = 8.0
+wateringSoundEffect = ExtResource("5_pntr7")
 
 [node name="Seedling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("5_mg33a")
-TimeInState = 5.0
+TimeInState = 20.0
 timer = NodePath("SeedlingTimer")
 nextState = NodePath("../Fledgeling")
 plantSprite = ExtResource("6_85gbh")
@@ -80,7 +84,7 @@ plantSprite = ExtResource("6_85gbh")
 
 [node name="Fledgeling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("7_le86g")
-TimeInState = 2.0
+TimeInState = 20.0
 timer = NodePath("FledgelingTimer")
 nextState = NodePath("../Adult")
 plantSprite = ExtResource("8_yyh66")
@@ -89,7 +93,7 @@ plantSprite = ExtResource("8_yyh66")
 
 [node name="Adult" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("9_m3um7")
-TimeInState = 2.0
+TimeInState = 60.0
 timer = NodePath("AdultTimer")
 nextState = NodePath("../Flowering")
 plantSprite = ExtResource("10_w5jey")
@@ -98,6 +102,7 @@ plantSprite = ExtResource("10_w5jey")
 
 [node name="Flowering" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("11_mn1w0")
+snipSound = ExtResource("12_eo704")
 TimeInState = 5.0
 timer = NodePath("Timer")
 nextState = NodePath("../Adult")

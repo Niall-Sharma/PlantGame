@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bevowcu380dks"]
+
+[ext_resource type="AudioStream" uid="uid://b1mtu46tghs4k" path="res://Plant/SoundEffects/Watering.wav" id="1_56h8s"]
+[ext_resource type="Script" path="res://AudioClip.cs" id="2_4l2fg"]
+
+[resource]
+script = ExtResource("2_4l2fg")
+volume = 1.0
+file = ExtResource("1_56h8s")

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b68xgkeakmgos"]
+
+[ext_resource type="AudioStream" uid="uid://d0hm6l1iupt5i" path="res://Master/ButtonPress.wav" id="1_epwsy"]
+[ext_resource type="Script" path="res://AudioClip.cs" id="2_3sunx"]
+
+[resource]
+script = ExtResource("2_3sunx")
+volume = 1
+file = ExtResource("1_epwsy")

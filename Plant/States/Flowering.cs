@@ -1,9 +1,11 @@
+using Audio;
 using Godot;
 using System;
 
 public partial class Flowering : State
 {
-
+	[Export]
+	AudioClip snipSound;
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _update()
 	{
@@ -19,6 +21,7 @@ public partial class Flowering : State
 
     void HarvestPlant(){
 		master.AddCurrency(GetParent<StateMachine>().plantValue);
+		audioManager.PlayAudio(snipSound);
 		if(!GetParent<StateMachine>().isReusable){
 			GetTree().QueueDelete(GetParent().GetParent());
 		}

@@ -6,7 +6,7 @@ namespace Audio
     public partial class AudioClip : Resource
     {
         [Export(PropertyHint.Range, "0,10")]
-        public int volume { get; set; }
+        public float volume { get; set; }
 
         [Export]
         public AudioStream file { get; set; }
@@ -18,7 +18,7 @@ namespace Audio
         // creating and editing your resource via the inspector.
         public AudioClip() : this(0, null) {}
 
-        public AudioClip(int volume, AudioStream file)
+        public AudioClip(float volume, AudioStream file)
         {
             volume = this.volume;
             file = this.file;

@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://d0npxienpnpjm"]
+[gd_scene load_steps=21 format=3 uid="uid://d0npxienpnpjm"]
 
 [ext_resource type="Script" path="res://Plant/PlantMain.cs" id="2_26a5l"]
 [ext_resource type="Resource" uid="uid://oe4abwfdbkhn" path="res://Plant/SoundEffects/DropSoundEffect.tres" id="3_kkjp7"]
 [ext_resource type="Script" path="res://Plant/States/StateMachine.cs" id="4_55qpe"]
+[ext_resource type="Resource" uid="uid://bevowcu380dks" path="res://Plant/SoundEffects/wateringSoundEffect.tres" id="5_dmqbb"]
 [ext_resource type="Script" path="res://Plant/States/Seedling.cs" id="5_in8ke"]
 [ext_resource type="Texture2D" uid="uid://behpnv6bsw547" path="res://Plants Sprite/Plant 1/Seedling.png" id="6_rrbhy"]
 [ext_resource type="Script" path="res://Plant/States/Fledgeling.cs" id="7_2x0td"]
@@ -10,6 +11,7 @@
 [ext_resource type="Script" path="res://Plant/States/Adult.cs" id="9_sklv5"]
 [ext_resource type="Texture2D" uid="uid://clx347n8tnim7" path="res://Plants Sprite/Plant 1/Adult.png" id="10_gtqr3"]
 [ext_resource type="Script" path="res://Plant/States/Flowering.cs" id="11_ebafr"]
+[ext_resource type="Resource" uid="uid://bg88v0tr2bub1" path="res://Plant/SoundEffects/snipSound.tres" id="12_4w8ak"]
 [ext_resource type="Texture2D" uid="uid://c65ys5s36iaqv" path="res://Plants Sprite/Plant 1/Harvest.png" id="12_yeots"]
 [ext_resource type="Script" path="res://Plant/States/Dead.cs" id="13_be01g"]
 [ext_resource type="Texture2D" uid="uid://w25r4cnxk53f" path="res://Plants Sprite/Plant 1/Dead.png" id="14_rsefb"]
@@ -70,6 +72,7 @@ growthBar = NodePath("../GrowthBar")
 timeToWater = 10.0
 plantValue = 1.0
 isReusable = true
+wateringSoundEffect = ExtResource("5_dmqbb")
 
 [node name="Seedling" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("5_in8ke")
@@ -100,6 +103,7 @@ plantSprite = ExtResource("10_gtqr3")
 
 [node name="Flowering" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "nextState")]
 script = ExtResource("11_ebafr")
+snipSound = ExtResource("12_4w8ak")
 TimeInState = 5.0
 timer = NodePath("Timer")
 nextState = NodePath("../Adult")

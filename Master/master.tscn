@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bbok12foypj58"]
+[gd_scene load_steps=34 format=3 uid="uid://bbok12foypj58"]
 
 [ext_resource type="Script" path="res://Master/Master.cs" id="1_te06e"]
 [ext_resource type="PackedScene" uid="uid://cljv8timn20u7" path="res://Plants/Cactus.tscn" id="2_vjhlb"]
@@ -6,10 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://bmibnymlqleo1" path="res://Windows/pixil-frame-0.png" id="3_1pq4k"]
 [ext_resource type="Texture2D" uid="uid://bm017oosh50ph" path="res://Windows/pixil-frame-0 (1).png" id="4_01mdq"]
 [ext_resource type="Texture2D" uid="uid://c5af4bj5eh73n" path="res://Master/Sprites/pixilart-drawing (1).png" id="5_genmb"]
+[ext_resource type="Resource" uid="uid://b68xgkeakmgos" path="res://Master/PressButtonSoundEffect.tres" id="5_u46ou"]
 [ext_resource type="Texture2D" uid="uid://p2e6jlwksq4i" path="res://Wallpapers/Wallpaper.png" id="6_se62a"]
-[ext_resource type="Texture2D" uid="uid://bm3yruhdkcs6l" path="res://icon.svg" id="6_tpk7o"]
 [ext_resource type="Texture2D" uid="uid://b3qnpw6wqm3tq" path="res://Master/Sprites/GoldCoin.png" id="7_hniqu"]
 [ext_resource type="Shader" path="res://Master/blur.gdshader" id="8_3vj1x"]
+[ext_resource type="Texture2D" uid="uid://cgvf2bfmvq8cr" path="res://Master/WateringCan.png" id="8_vl1qo"]
 [ext_resource type="Script" path="res://Master/AudioManager.cs" id="8_x8eo3"]
 [ext_resource type="Script" path="res://Buy Menu/BuyMenu.cs" id="9_igsih"]
 [ext_resource type="Texture2D" uid="uid://c65ys5s36iaqv" path="res://Plants Sprite/Plant 1/Harvest.png" id="9_inirs"]
@@ -56,7 +57,7 @@ gradient = SubResource("Gradient_atod2")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_atmp5"]
 size = Vector2(9.24323, 20)
 
-[node name="Master" type="Node2D" node_paths=PackedStringArray("currencyLabel", "buyMenu", "menuCode", "stopwatch", "dayCounter", "windowSprite", "canvasModulate", "lamps", "sunLight")]
+[node name="Master" type="Node2D" node_paths=PackedStringArray("currencyLabel", "buyMenu", "menuCode", "stopwatch", "dayCounter", "windowSprite", "canvasModulate", "lamps", "sunLight", "audioManager")]
 script = ExtResource("1_te06e")
 currencyLabel = NodePath("CanvasLayer/Coin Counter/CoinCounter")
 buyMenu = NodePath("CanvasLayer/Buy Menu")
@@ -68,13 +69,11 @@ windowSprite = NodePath("Props/Window/Sprite2D")
 canvasModulate = NodePath("CanvasModulate")
 lamps = [NodePath("Props/Lamp"), NodePath("Props/Lamp5"), NodePath("Props/Lamp2"), NodePath("Props/Lamp3"), NodePath("Props/Lamp7")]
 sunLight = NodePath("Props/DirectionalLight2D")
+pressButtonSound = ExtResource("5_u46ou")
+audioManager = NodePath("Audio Manager")
 
 [node name="Audio Manager" type="Node" parent="."]
 script = ExtResource("8_x8eo3")
-
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
-autoplay = true
-bus = &"Music"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.109796, 0.168562, 0.249261, 1)
@@ -93,6 +92,47 @@ zoom = Vector2(0.65, 0.65)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="WateringButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -214.0
+offset_top = -163.0
+offset_right = 219.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.518011, 1.1825)
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = -210.0
+offset_top = -249.0
+offset_right = -170.0
+offset_bottom = -209.0
+scale = Vector2(7.36, 7.36)
+mouse_filter = 2
+texture = ExtResource("8_vl1qo")
+expand_mode = 5
+
 [node name="BuyButton" type="Button" parent="CanvasLayer"]
 z_index = 100
 anchors_preset = 2
@@ -105,21 +145,6 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 80
 shortcut = SubResource("Shortcut_tpkeo")
 text = "Buy"
-
-[node name="WateringButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -433.0
-offset_top = -145.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 100
-theme_override_icons/icon = ExtResource("6_tpk7o")
-toggle_mode = true
-text = "Water"
 
 [node name="Buy Menu" type="Control" parent="CanvasLayer"]
 visible = false
@@ -248,8 +273,6 @@ theme_override_font_sizes/font_size = 100
 text = "Day 1"
 horizontal_alignment = 2
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-
 [node name="Cactus" parent="." instance=ExtResource("2_vjhlb")]
 position = Vector2(-333, -64)
 
@@ -353,8 +376,8 @@ position = Vector2(-24, -873)
 visible = false
 energy = 0.5
 
+[connection signal="toggled" from="CanvasLayer/Control/WateringButton" to="." method="_on_watering_button_toggled"]
 [connection signal="pressed" from="CanvasLayer/BuyButton" to="." method="_on_buy_button_pressed"]
-[connection signal="toggled" from="CanvasLayer/WateringButton" to="." method="_on_watering_button_toggled"]
 [connection signal="pressed" from="CanvasLayer/Buy Menu/VBoxContainer/HBoxContainer/Previous" to="CanvasLayer/Buy Menu/VBoxContainer" method="_on_previous_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buy Menu/VBoxContainer/HBoxContainer/Buy Plant" to="CanvasLayer/Buy Menu/VBoxContainer" method="_on_buy_plant_pressed"]
 [connection signal="pressed" from="CanvasLayer/Buy Menu/VBoxContainer/HBoxContainer/Advance" to="CanvasLayer/Buy Menu/VBoxContainer" method="_on_advance_pressed"]

@@ -1,3 +1,4 @@
+using Audio;
 using Godot;
 using System;
 
@@ -39,6 +40,11 @@ public partial class Master : Node2D
 	[Export]
 	Node2D sunLight;
 
+	[ExportCategory("Audio")]
+	[Export]
+	AudioClip pressButtonSound;
+	[Export]
+	AudioManager audioManager;
 
 	public void toggleLamps(bool toggle){
 		foreach (Node2D lamp in lamps)
@@ -48,8 +54,8 @@ public partial class Master : Node2D
 		}
 	}
 	private void _on_watering_button_toggled(bool toggled_on){
-		GD.Print(toggled_on);
 		waterToggle = toggled_on;
+		audioManager.PlayAudio(pressButtonSound);
 	}
 
 	public bool checkWaterToggle(){
@@ -67,6 +73,7 @@ public partial class Master : Node2D
 	private void _on_buy_button_pressed(){
 		buyMenu.Visible = !buyMenu.Visible;
 		menuCode.UpdateMenu();
+		audioManager.PlayAudio(pressButtonSound);
     }
 
 	public void BuyPlant(PackedScene instance, int price){
@@ -114,13 +121,15 @@ public partial class Master : Node2D
 			windowSprite.Texture = sprites[2];
 			isNight = false;
 			toggleLamps(true);
+			GD.Print("IsNight: "+isNight);
 
 		}
-		if(minutes > 7 && !isNight){
+		if(minutes > 7 && minutes < 19 && !isNight){
 			isNight = true;
 			Random rng = new Random();
 			windowSprite.Texture = sprites[rng.Next(0,1)];
 			toggleLamps(false);
+			GD.Print("IsNight: "+isNight);
 		}
 
      }

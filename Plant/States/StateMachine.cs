@@ -1,3 +1,4 @@
+using Audio;
 using Godot;
 using System;
 
@@ -45,6 +46,10 @@ public partial class StateMachine : Node
 	[Export]
 	public bool isReusable;
 
+	[ExportCategory("Audio")]
+	[Export]
+	AudioClip wateringSoundEffect;
+	AudioManager audioManager;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -52,12 +57,14 @@ public partial class StateMachine : Node
 		waterTimer.Start(timeToWater);
 		waterTimer.Timeout += () => KillPlant();
 		setNextState(initialState);		
+		audioManager = GetParent().GetParent().GetChild<AudioManager>(0);
 		foreach (var state in states)
 		{
 			state.sprite2D = sprite2D;
 			state.plantMain = plantMain;
 			state.master = master;
 			state.growthBar = growthBar;
+			state.audioManager = audioManager;
 		}
 	}
 
@@ -72,9 +79,11 @@ public partial class StateMachine : Node
 		timerLabel.Value = waterTimer.TimeLeft;
 		timerLabel.MaxValue = timeToWater;
 
-		if(plantMain.mouseInArea && currentState != states[4] && Input.IsMouseButtonPressed(MouseButton.Left) && master.checkWaterToggle()){
+		if(plantMain.mouseInArea && currentState != states[4] && Input.IsActionJustReleased("Watering") && master.checkWaterToggle()){
 			waterTimer.Stop();
 			waterTimer.Start(timeToWater);
+			audioManager.PlayAudio(wateringSoundEffect);
+
 		}
 	}
 
