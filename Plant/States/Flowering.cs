@@ -14,12 +14,12 @@ public partial class Flowering : State
 		}
 	}
 
-    public override void _OnEnter()
-    {
-        sprite2D.Texture = plantSprite;
-    }
+	public override void _OnEnter()
+	{
+		sprite2D.Texture = plantSprite;
+	}
 
-    void HarvestPlant(){
+	void HarvestPlant(){
 		master.AddCurrency(GetParent<StateMachine>().plantValue);
 		audioManager.PlayAudio(snipSound);
 		if(!GetParent<StateMachine>().isReusable){

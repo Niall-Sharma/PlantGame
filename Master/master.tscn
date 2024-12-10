@@ -67,7 +67,7 @@ dayCounter = NodePath("CanvasLayer/Days")
 sprites = Array[Texture2D]([ExtResource("2_vnn7g"), ExtResource("3_1pq4k"), ExtResource("4_01mdq")])
 windowSprite = NodePath("Props/Window/Sprite2D")
 canvasModulate = NodePath("CanvasModulate")
-lamps = [NodePath("Props/Lamp"), NodePath("Props/Lamp5"), NodePath("Props/Lamp2"), NodePath("Props/Lamp3"), NodePath("Props/Lamp7")]
+lamps = []
 sunLight = NodePath("Props/DirectionalLight2D")
 pressButtonSound = ExtResource("5_u46ou")
 audioManager = NodePath("Audio Manager")
@@ -273,6 +273,21 @@ theme_override_font_sizes/font_size = 100
 text = "Day 1"
 horizontal_alignment = 2
 
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.718229
+anchor_top = 0.874074
+anchor_right = 0.864062
+anchor_bottom = 0.988889
+offset_right = -210.0
+offset_bottom = -93.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(4, 4)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Menu"
+
 [node name="Cactus" parent="." instance=ExtResource("2_vjhlb")]
 position = Vector2(-333, -64)
 
@@ -361,6 +376,7 @@ position = Vector2(6, 722)
 scale = Vector2(1874.22, -9.33249)
 
 [node name="Sprite2D" type="Sprite2D" parent="Props/Floor"]
+position = Vector2(-0.00960399, -42.4324)
 scale = Vector2(1, 41.8251)
 texture = SubResource("GradientTexture1D_fr3np")
 
